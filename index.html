@@ -1,1 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isobel Ricketts — Photographer</title>
+<meta name="description" content="Isobel Ricketts — Documentary and travel photographer. London.">
+<meta name="robots" content="noai, noimageai, noindex-ai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  :root {
+    --white: #ffffff;
+    --black: #0a0a0a;
+    --grey-light: #f5f4f2;
+    --grey-mid: #c8c6c0;
+    --grey-dark: #6b6963;
+    --accent: #1a1a1a;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-serif);
+    font-weight: 300;
+    line-height: 1.6;
+    cursor: crosshair;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid var(--grey-mid);
+  }
+
+  .nav-name {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--black);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--grey-dark);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--black); }
+
+  /* HERO */
+  .hero {
+    padding: 12rem 3rem 5rem;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--grey-dark);
+  }
+
+  .hero-bio {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--grey-dark);
+    max-width: 460px;
+    line-height: 1.8;
+    border-left: 1px solid var(--grey-mid);
+    padding-left: 1.5rem;
+  }
+
+  /* DIVIDER */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 3rem 3rem 2rem;
+  }
+
+  .section-label span {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--grey-dark);
+    white-space: nowrap;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--grey-mid);
+  }
+
+  /* PROJECTS GRID */
+  .projects {
+    padding: 0 3rem 6rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--grey-mid);
+    border-top: 1px solid var(--grey-mid);
+    border-bottom: 1px solid var(--grey-mid);
+  }
+
+  .project-item {
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: crosshair;
+    display: block;
+    text-decoration: none;
+  }
+
+  .project-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--grey-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.4s ease;
+  }
+
+  .project-item:hover .project-placeholder {
+    background: #eeede9;
+  }
+
+  .placeholder-text {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+    text-align: center;
+    padding: 1rem;
+  }
+
+  /* Image style for when photos are added */
+  .project-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: saturate(0.9);
+  }
+
+  .project-item:hover img {
+    transform: scale(1.03);
+    filter: saturate(1);
+  }
+
+  .project-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 2rem 1.5rem 1.5rem;
+    background: linear-gradient(to top, rgba(255,255,255,0.95) 60%, transparent);
+    transform: translateY(100%);
+    transition: transform 0.35s ease;
+  }
+
+  .project-item:hover .project-info {
+    transform: translateY(0);
+  }
+
+  .project-location {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--grey-dark);
+    margin-bottom: 0.3rem;
+  }
+
+  .project-title {
+    font-size: 1.3rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .project-arrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--grey-dark);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-item:hover .project-arrow { opacity: 1; }
+
+  /* ABOUT */
+  .about {
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    border-top: 0.5px solid var(--grey-mid);
+  }
+
+  .about-left h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  .about-left h2 em {
+    font-style: italic;
+    color: var(--grey-dark);
+  }
+
+  .about-right p {
+    font-size: 1rem;
+    color: var(--grey-dark);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-right p strong {
+    color: var(--black);
+    font-weight: 400;
+  }
+
+  .credentials {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .credential {
+    display: flex;
+    gap: 1.5rem;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  .credential-label {
+    color: var(--grey-mid);
+    text-transform: uppercase;
+    min-width: 80px;
+  }
+
+  .credential-value {
+    color: var(--grey-dark);
+  }
+
+  /* CONTACT */
+  .contact {
+    padding: 5rem 3rem;
+    background: var(--black);
+    color: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .contact h2 {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--white);
+  }
+
+  .contact h2 em {
+    font-style: italic;
+    color: var(--grey-mid);
+  }
+
+  .contact-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .contact-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 0.5px solid rgba(255,255,255,0.15);
+    text-decoration: none;
+    color: var(--white);
+    transition: opacity 0.2s;
+  }
+
+  .contact-line:hover { opacity: 0.6; }
+
+  .contact-line-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--grey-mid);
+  }
+
+  .contact-line-value {
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.5rem 3rem;
+    background: var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  footer p {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* PROTECTION */
+  .project-item {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero { animation: fadeUp 0.8s ease forwards; }
+
+  .project-item {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .project-item:nth-child(1) { animation-delay: 0.1s; }
+  .project-item:nth-child(2) { animation-delay: 0.2s; }
+  .project-item:nth-child(3) { animation-delay: 0.3s; }
+  .project-item:nth-child(4) { animation-delay: 0.4s; }
+  .project-item:nth-child(5) { animation-delay: 0.5s; }
+  .project-item:nth-child(6) { animation-delay: 0.6s; }
+  .project-item:nth-child(7) { animation-delay: 0.7s; }
+  .project-item:nth-child(8) { animation-delay: 0.8s; }
+  .project-item:nth-child(9) { animation-delay: 0.9s; }
+
+  /* NO RIGHT CLICK */
+  img { pointer-events: none; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { padding: 8rem 1.5rem 3rem; }
+    .section-label { padding: 2rem 1.5rem 1.5rem; }
+    .projects { padding: 0; grid-template-columns: repeat(2, 1fr); }
+    .about { padding: 3rem 1.5rem; grid-template-columns: 1fr; gap: 2rem; }
+    .contact { padding: 3rem 1.5rem; grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 1.2rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .projects { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body oncontextmenu="return false;">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Isobel Ricketts</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">London — Documentary & Travel Photography</p>
+  <h1>Telling stories<br>the world<br><em>almost missed.</em></h1>
+  <p class="hero-bio">Photographer drawn to subcultures, street life and the quiet drama of everyday existence. Working across documentary, portrait and editorial.</p>
+</section>
+
+<!-- PROJECTS -->
+<div class="section-label" id="projects">
+  <span>Selected Work</span>
+</div>
+
+<section class="projects">
+
+  <!-- 1. Street Artists, Mexico -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Mexico</p>
+      <p class="project-title">Street Artists</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 2. Horse Trainer, Mexico -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Mexico</p>
+      <p class="project-title">Horse Trainer</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 3. Underground, Ethiopia -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Ethiopia</p>
+      <p class="project-title">Underground</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 4. Style, Ethiopia -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Ethiopia</p>
+      <p class="project-title">Style</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 5. Tribes, Ethiopia -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Ethiopia</p>
+      <p class="project-title">Tribes</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 6. In The Shadows, Cuba -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Cuba</p>
+      <p class="project-title">In The Shadows</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 7. Cuban Streets, Cuba -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Cuba</p>
+      <p class="project-title">Cuban Streets</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 8. Day Job, Thailand -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">Thailand</p>
+      <p class="project-title">Day Job</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+  <!-- 9. Elba Vs Block -->
+  <a class="project-item" href="#contact">
+    <div class="project-placeholder">
+      <p class="placeholder-text">Add your image here</p>
+    </div>
+    <div class="project-info">
+      <p class="project-location">ROKU — Behind the Scenes & Press Stills</p>
+      <p class="project-title">Elba Vs Block</p>
+    </div>
+    <span class="project-arrow">→</span>
+  </a>
+
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-left">
+    <h2>Documentary.<br>Travel.<br><em>Human.</em></h2>
+  </div>
+  <div class="about-right">
+    <p>I'm a London-based photographer working across documentary, portrait and travel. My work takes me into subcultures, street life and the kind of stories that exist just outside the frame of ordinary life.</p>
+    <p>Commissions have taken me to <strong>Ethiopia, Cuba, Mexico, Thailand, the USA and Australia</strong>. I shoot editorial and commercial work alongside long-form personal projects.</p>
+    <p>Based in London. Available for commissions worldwide.</p>
+    <div class="credentials">
+      <div class="credential">
+        <span class="credential-label">Based</span>
+        <span class="credential-value">London, UK</span>
+      </div>
+      <div class="credential">
+        <span class="credential-label">Work</span>
+        <span class="credential-value">Editorial — Documentary — Commercial</span>
+      </div>
+      <div class="credential">
+        <span class="credential-label">Screen</span>
+        <span class="credential-value">Elba Vs Block, ROKU TV</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Available<br>for<br><em>commissions.</em></h2>
+  <div class="contact-right">
+    <a class="contact-line" href="mailto:isobel@working-legends.com">
+      <span class="contact-line-label">Email</span>
+      <span class="contact-line-value">isobel@working-legends.com</span>
+    </a>
+    <a class="contact-line" href="https://www.instagram.com/project_ernest" target="_blank" rel="noopener">
+      <span class="contact-line-label">Instagram</span>
+      <span class="contact-line-value">@project_ernest</span>
+    </a>
+    <a class="contact-line" href="https://working-legends.com" target="_blank" rel="noopener">
+      <span class="contact-line-label">Production</span>
+      <span class="contact-line-value">Working Legends</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Isobel Ricketts. All rights reserved. Not licensed for AI training.</p>
+  <p>London, UK</p>
+</footer>
+
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('dragstart', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'PrintScreen') e.preventDefault();
+  });
+</script>
+
+</body>
+</html>
